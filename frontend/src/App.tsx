@@ -1,11 +1,20 @@
 // src/App.tsx
-import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./components/Home";
+import LoginPage from "./components/LoginPage";
 
-const App: React.FC = () => {
+const App = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-600">Hello, Tailwind CSS!</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<LoginPage />} />
+          {/* <Route path="register" element={<RegisterPage  />} /> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
