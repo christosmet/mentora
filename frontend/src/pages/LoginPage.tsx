@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, SetError] = useState<string>("");
@@ -19,7 +19,6 @@ const LoginPage = () => {
           password,
         }
       );
-      console.log("Login Succesful", response.data);
       const { access, refresh } = response.data;
       localStorage.setItem("access", access);
       localStorage.setItem("refresh", refresh);
@@ -59,4 +58,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Login;
