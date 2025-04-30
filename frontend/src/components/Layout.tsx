@@ -1,14 +1,16 @@
-import { Outlet } from "react-router-dom";
+// src/components/Layout.tsx
+import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 
-const Layout = () => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const location = useLocation();
+  const hideNavbar = ["/login", "/register"].includes(location.pathname);
+
   return (
-    <div>
-      <Navbar />
-      <main className="p-4">
-        <Outlet />
-      </main>
-    </div>
+    <>
+      {!hideNavbar && <Navbar />}
+      <main className="p-4">{children}</main>
+    </>
   );
 };
 

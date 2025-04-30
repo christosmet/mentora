@@ -1,13 +1,21 @@
 // src/components/Login.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import AuthFormWrapper from "../components/AuthFormWrapper";
+import { isAuthenticated } from "../utils/auth";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, SetError] = useState<string>("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate("/", { replace: true });
+    }
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,8 +37,7 @@ const Login = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10">
-      <h2 className="text-xl font-semibold mb-4">Login</h2>
+    <AuthFormWrapper title="Login">
       <form onSubmit={handleLogin} className="space-y-4">
         <input
           type="email"
@@ -54,7 +61,13 @@ const Login = () => {
           Login
         </button>
       </form>
-    </div>
+      <p className="text-center mt-4 text-sm">
+        Don’t have an account?{" "}
+        <Link to="/register" className="text-blue-500 hover:underline">
+          Register
+        </Link>
+      </p>
+    </AuthFormWrapper>
   );
 };
 
