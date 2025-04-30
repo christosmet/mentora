@@ -28,7 +28,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=50)
     date_of_birth = models.DateField(null=True, blank=True)
     country = models.CharField(max_length=100, blank=True)
-    is_creator = models.BooleanField(default=False)
+    is_mentor = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
